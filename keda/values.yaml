@@ -5,30 +5,30 @@
 global:
   image:
     # -- Global image registry of KEDA components
-    registry: null
+    registry: docker.io
 
 image:
   keda:
     # -- Image registry of KEDA operator
     registry: null
     # -- Image name of KEDA operator
-    repository: ghcr.io/kedacore/keda
+    repository: bbvikas/keda
     # -- Image tag of KEDA operator. Optional, given app version of Helm chart is used by default
-    tag: ""
+    tag: "main"
   metricsApiServer:
     # -- Image registry of KEDA Metrics API Server
     registry: null
     # -- Image name of KEDA Metrics API Server
-    repository: ghcr.io/kedacore/keda-metrics-apiserver
+    repository: bbvikas/keda-metrics-apiserver
     # -- Image tag of KEDA Metrics API Server. Optional, given app version of Helm chart is used by default
-    tag: ""
+    tag: "main"
   webhooks:
     # -- Image registry of KEDA admission-webhooks
     registry: null
     # -- Image name of KEDA admission-webhooks
-    repository: ghcr.io/kedacore/keda-admission-webhooks
+    repository: bbvikas/keda-admission-webhooks
     # -- Image tag of KEDA admission-webhooks . Optional, given app version of Helm chart is used by default
-    tag: ""
+    tag: "main"
   # -- Image pullPolicy for all KEDA components
   pullPolicy: Always
 
