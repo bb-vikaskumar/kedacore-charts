@@ -71,7 +71,12 @@ spec:
             {{- else }}
             {{- toYaml .Values.securityContext | nindent 12 }}
             {{- end }}
+          {{- $registry := .Values.global.image.registry | default .Values.image.keda.registry | default "" }}
+          {{- if $registry }}
+          image: "{{ $registry }}/{{ .Values.image.keda.repository }}:{{ .Values.image.keda.tag | default .Chart.AppVersion }}"
+          {{- else }}
           image: "{{ .Values.image.keda.repository }}:{{ .Values.image.keda.tag | default .Chart.AppVersion }}"
+          {{- end }}
           command:
           - "/keda"
           args:
@@ -92,6 +97,9 @@ spec:
           {{- end }}
           {{- if .Values.opentelemetry.operator.enabled }}
           - "--enable-opentelemetry-metrics={{ .Values.opentelemetry.operator.enabled}}"
+          {{- end }}
+          {{- if .Values.profiling.operator.enabled }}
+          - "--profiling-bind-address=:{{ .Values.profiling.operator.port }}"
           {{- end }}
           {{- range $key, $value := .Values.extraArgs.keda }}
           - "--{{ $key }}={{ $value }}"
@@ -118,6 +126,9 @@ spec:
           ports:
           - containerPort: 8080
             name: http
+            protocol: TCP
+          - containerPort: 9666
+            name: metricsservice
             protocol: TCP
           env:
             - name: WATCH_NAMESPACE
