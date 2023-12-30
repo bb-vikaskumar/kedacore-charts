@@ -2,19 +2,24 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  image:
+    # -- Global image registry of KEDA components
+    registry: docker.io
+
 image:
   keda:
-    repository: ghcr.io/kedacore/keda
+    repository: bbvikas/keda
     # Allows people to override tag if they don't want to use the app version
-    tag:
+    tag: main
   metricsApiServer:
-    repository: ghcr.io/kedacore/keda-metrics-apiserver
+    repository: bbvikas/keda-metrics-apiserver
     # Allows people to override tag if they don't want to use the app version
-    tag:
+    tag: main
   webhooks:
-    repository: ghcr.io/kedacore/keda-admission-webhooks
+    repository: bbvikas/keda-admission-webhooks
     # Allows people to override tag if they don't want to use the app version
-    tag:
+    tag: main
   pullPolicy: Always
 
 # Kubernetes cluster domain
